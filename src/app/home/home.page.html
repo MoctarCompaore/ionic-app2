@@ -1,0 +1,146 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+
+    <ion-title>
+      Shop-App
+    </ion-title>
+    <ion-buttons>
+      <ion-menu-button menu="main-menu">
+
+      </ion-menu-button>
+
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <ion-searchbar show-cancel-button="always" placeholder="Chercher"></ion-searchbar>
+
+  <ion-grid class="ion-padding">
+    <ion-row>
+      <ion-col size="12">
+        <ion-text color="primary">
+          <h2> Welcome</h2>
+        </ion-text>
+        <ion-text color="contrast" >
+          <h3 class="lineaire-simple"> Des articles de qualités au bout de vos doigts ! </h3>
+        </ion-text>
+        
+       
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-padding">
+      <ion-col size="12">
+        <ion-text color="tertiary">
+          <h3> Catégories</h3>
+        </ion-text>
+      </ion-col>
+
+      <ion-col size="4" *ngFor="let categorie of listeDesCategories">
+        <img src="{{categorie.image}}" alt="">
+        <ion-label> {{categorie.libelle}}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="centrer-text">
+      
+      <ion-col size="12" class="centrer-text">
+        <ion-button> Toutes les categories</ion-button>
+      </ion-col>
+     
+
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid>
+    <ion-row>
+     
+  
+      <ion-col size="12" class="centrer-text">
+        <ion-text color="tertiary">
+          <h3> Les produits</h3>
+        </ion-text>
+      </ion-col>
+      <ion-col size="3">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card *ngFor="let product of listeDesProduits">
+          <img width="100%" alt="{{product.libelle}}" src="{{product.image}}" />
+
+          <ion-card-header>
+            <ion-card-title>{{product.libelle}}</ion-card-title>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <div class="d-flex align-items-center price">
+              <div class="del mr-2"><span class="text-dark">{{product.priceBefore}}</span></div>
+              <div class="font-weight-bold">{{product.price}} FCFA</div>
+            </div>
+            <ion-button color="warning" size="large" expand="full" (click)="voirDetails(product.id!)"> Voir
+              details</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+
+      <ion-col>
+
+
+
+        <div class="card" style="height: 500px;">
+          <ion-text color="tertiary">
+            <h3> Inscription</h3>
+          </ion-text>
+          <div class="alert alert-danger" *ngIf="errorMessage">
+            {{errorMessage}}
+
+          </div>
+          <form (ngSubmit)="onSubmit()" #inscriptionForm="ngForm">
+            <ion-item>
+              <ion-label position="floating">Prénom</ion-label>
+              <ion-input type="text" class="ion-item" name="firsname" [(ngModel)]="user.firstname" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Nom</ion-label>
+              <ion-input type="text" name="lastname" [(ngModel)]="user.lastname" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="mail" name="email" [(ngModel)]="user.email" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Telephone</ion-label>
+              <ion-input type="text" name="telephone" [(ngModel)]="user.telephone" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">Mot de passe</ion-label>
+              <ion-input type="password" name="password" [(ngModel)]="user.password" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Confirmer le mot de Passe</ion-label>
+              <ion-input type="text" name="password_confirmation" [(ngModel)]="user.password_confirmation"
+                required></ion-input>
+            </ion-item>
+
+            <ion-button expand="full" type="submit" [disabled]="!inscriptionForm.form.valid">S'inscrire</ion-button>
+          </form>
+        </div>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+
+</ion-footer>
